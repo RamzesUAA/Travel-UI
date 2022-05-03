@@ -6,7 +6,7 @@ import Search from "./components/Search";
 import Footer from "./components/Footer";
 import Carousel from "./components/Carousel";
 
-const App = () => {
+const LandingPage = () => {
   return (
     <div>
       <Navbar />
@@ -19,4 +19,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default LandingPage;
