@@ -6,6 +6,7 @@ import CheckPage from "./pages/check";
 import TransporPage from "./pages/transport";
 import TransportationPage from "./pages/transportation";
 import HotelPage from "./pages/hotel";
+import CustomerPage from "./pages/customer";
 
 const AdminPage = () => {
   return (
@@ -16,6 +17,7 @@ const AdminPage = () => {
         <Route path="transport" element={<TransporPage />} />
         <Route path="transportation" element={<TransportationPage />} />
         <Route path="hotel" element={<HotelPage />} />
+        <Route path="customer" element={<CustomerPage />} />
       </Route>
     </Routes>
   );

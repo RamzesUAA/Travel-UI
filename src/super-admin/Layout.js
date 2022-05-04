@@ -5,7 +5,7 @@ import { BsPerson } from "react-icons/bs";
 const Layout = () => {
   return (
     <div>
-      <div className="w-full flex justify-between items-center px-4">
+      <div className="w-full flex justify-between items-center px-4 pb-10">
         <div>
           <h1>TRAVEL-APP</h1>
         </div>
@@ -25,14 +25,19 @@ const Layout = () => {
           <li>
             <Link to="/admin/transportation">Transportations</Link>
           </li>
+          <li>
+            <Link to="/admin/customer">Customers</Link>
+          </li>
         </ul>
 
         <div className="hidden md:flex">
-          <BsPerson size={20} />
-          <div className="pr-2">Roman Alberda</div>
+          <BsPerson className="mr-3" size={20} />
+          <div>Roman Alberda</div>
         </div>
       </div>
-      <Outlet />
+      <div className="container flex justify-center mx-auto">
+        <Outlet />
+      </div>
     </div>
   );
 };

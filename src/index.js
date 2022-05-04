@@ -4,6 +4,8 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./landing";
 import AdminPage from "./super-admin";
+import "ag-grid-community/dist/styles/ag-grid.css"; // Core grid CSS, always needed
+import "ag-grid-community/dist/styles/ag-theme-alpine.css"; // Optional theme CSS
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
