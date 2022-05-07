@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { BsPerson } from "react-icons/bs";
 
 const Layout = () => {
   return (
-    <div>
+    <div className="bg-neutral-100 h-auto pb-10">
       <div className="w-full flex justify-between items-center px-4 pb-10">
         <div>
           <h1>TRAVEL-APP</h1>
@@ -35,7 +35,7 @@ const Layout = () => {
           <div>Roman Alberda</div>
         </div>
       </div>
-      <div className="container flex justify-center mx-auto">
+      <div className="max-w-[1240px] mx-auto">
         <Outlet />
       </div>
     </div>

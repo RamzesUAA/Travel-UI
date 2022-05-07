@@ -1,80 +1,82 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useMemo, useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
-import Button from "../../unitilies/Button";
-import deleteIcon from "../../../assets/delete.svg";
-import { LoadingIcon } from "../../unitilies/LoadingIcon";
+// import Button from "../../unitilies/Button";
+import { createBaseApi } from "../../ApiAgent";
 const CheckPage = () => {
+  const [checks, setChecks] = useState([]);
+  const [selectedRow, setSelectedRow] = useState();
+
+  useEffect(() => {
+    createBaseApi()
+      .get("check")
+      .then((res) => {
+        setChecks(res?.data);
+      });
+  }, []);
   const [rowData, setRowData] = useState();
   const [columnDefs, setColumnDefs] = useState([
     {
-      field: "athlete",
-      minWidth: 170,
+      field: "id",
+      value: "",
+      width: "70px",
+      cellRenderer: function (params) {
+        return <a href="transport">{params.value}</a>;
+      },
     },
-    { field: "age" },
-    { field: "country" },
-    { field: "year" },
-    { field: "date" },
-    { field: "sport" },
-    { field: "gold" },
-    { field: "silver" },
-    { field: "bronze" },
-    { field: "total" },
+    { field: "price" },
+    { field: "personCount" },
+    { field: "tour.country", headerName: "Country" },
+    {
+      valueGetter: function sumField(params) {
+        return `${params.data.user.name} ${params.data.user.surname}`;
+      },
+      headerName: "User name",
+    },
+    {
+      valueGetter: function sumField(params) {
+        return `${params.data.manager.name} ${params.data.manager.surname}`;
+      },
+      headerName: "Travel agent name",
+    },
+    { field: "createdAt" },
   ]);
-  const autoGroupColumnDef = useMemo(() => {
-    return {
-      headerName: "Group",
-      minWidth: 170,
-      field: "athlete",
-      valueGetter: function (params) {
-        if (params.node.group) {
-          return params.node.key;
-        } else {
-          return params.data[params.colDef.field];
-        }
-      },
-      // headerCheckboxSelection: true,
-      cellRenderer: "agGroupCellRenderer",
-      cellRendererParams: {
-        checkbox: true,
-      },
-    };
-  }, []);
 
-  const onGridReady = useCallback((params) => {
-    fetch("https://www.ag-grid.com/example-assets/olympic-winners.json")
-      .then((resp) => resp.json())
-      .then((data) => setRowData(data));
+  const defaultColDef = useMemo(() => {
+    return {
+      flex: 1,
+      sortable: true,
+      resizable: true,
+      filter: true,
+    };
   }, []);
 
   return (
     <div>
       <div className="ag-theme-alpine" style={{ width: 1224, height: 700 }}>
         <AgGridReact
-          rowData={rowData}
+          rowData={checks}
+          defaultColDef={defaultColDef}
           columnDefs={columnDefs}
-          autoGroupColumnDef={autoGroupColumnDef}
           rowSelection={"single"}
-          // rowGroupPanelShow={"always"}
-          // pivotPanelShow={"always"}
           pagination={true}
-          onGridReady={onGridReady}
         ></AgGridReact>
       </div>
-      <div className="flex justify-center">
-        <Button
-          className="m-3"
-          conent="Edit"
-          link="travel"
-          color="green"
-        ></Button>
-        <Button
-          className="m-3"
-          conent="Delete"
-          link="travel"
-          color="red"
-          icon="delete"
-        ></Button>
-      </div>
+
+      {/*      
+      <Button
+        className="m-3"
+        conent="Edit"
+        link="travel"
+        color="green"
+      ></Button>
+      <Button
+        className="m-3"
+        conent="Delete"
+        link="travel"
+        color="red"
+        icon="delete"
+      ></Button> */}
+      {/* <div className="flex justify-center"></div> */}
     </div>
   );
 };

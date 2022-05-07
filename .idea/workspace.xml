@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5e36082f-75d5-4084-b361-2b0afa099992" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/super-admin/Layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/super-admin/Layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/super-admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/super-admin/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/super-admin/pages/check/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/super-admin/pages/check/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/super-admin/pages/transport/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/super-admin/pages/transport/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/super-admin/pages/travel/SelectsCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/super-admin/pages/travel/SelectsCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/super-admin/pages/travel/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/super-admin/pages/travel/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/super-admin/unitilies/Button.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/super-admin/unitilies/LoadingIcon.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="28pNZIi7LWc5KkEOzdGLAQOORnh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5e36082f-75d5-4084-b361-2b0afa099992" name="Changes" comment="" />
+      <created>1651909640399</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651909640399</updated>
+    </task>
+    <servers />
+  </component>
+</project>

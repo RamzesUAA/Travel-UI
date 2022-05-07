@@ -1,101 +1,92 @@
-import React from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { AgGridReact } from "ag-grid-react";
+import DeleteButton from "../../unitilies/DeleteButton";
+import ViewButton from "../../unitilies/EditButton";
+import AddButton from "../../unitilies/AddButton";
+import { createBaseApi } from "../../ApiAgent";
+import { useNavigate } from "react-router-dom";
+
+const columnDefs = [
+  {
+    field: "id",
+    value: "",
+    maxWidth: 80,
+    cellRenderer: function (params) {
+      return <a href="transport">{params.value}</a>;
+    },
+  },
+  { field: "type" },
+  { field: "model" },
+  { field: "number", headerName: "Country" },
+];
+
+const defaultColDef = {
+  flex: 1,
+  sortable: true,
+  resizable: true,
+  filter: true,
+};
 
 const TransporPage = () => {
+  const [transports, setTransports] = useState([]);
+  const gridRef = useRef();
+  const [selectedRow, setSelectedRow] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    createBaseApi()
+      .get("transport")
+      .then((res) => {
+        setTransports(res?.data);
+      });
+  }, []);
+
+  const onAddPressed = () => {
+    navigate("new");
+  };
+
+  const onViewPressed = () => {
+    const id = selectedRow?.[0]?.id;
+    id && navigate(`edit/${id}`);
+  };
+
+  const onDeletePressed = () => {
+    const id = selectedRow?.[0]?.id;
+    id &&
+      createBaseApi()
+        .delete("transport", { data: { id } })
+        .then((res) => {
+          res && setTransports(transports.filter((t) => t.id != id));
+        });
+  };
+
+  const onSelectionChanged = useCallback(() => {
+    const selectedRows = gridRef.current.api.getSelectedRows();
+    setSelectedRow(selectedRows);
+  }, []);
+
   return (
-    <div className="max-w-[1240px] mx-auto ">
-      <div className="border-b border-gray-200 shadow">
-        <table>
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-2 text-xs text-gray-500">ID</th>
-              <th className="px-6 py-2 text-xs text-gray-500">Name</th>
-              <th className="px-6 py-2 text-xs text-gray-500">Email</th>
-              <th className="px-6 py-2 text-xs text-gray-500">Created_at</th>
-              <th className="px-6 py-2 text-xs text-gray-500">Edit</th>
-              <th className="px-6 py-2 text-xs text-gray-500">Delete</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white">
-            <tr className="whitespace-nowrap">
-              <td className="px-6 py-4 text-sm text-gray-500">1</td>
-              <td className="px-6 py-4">
-                <div className="text-sm text-gray-900">Jon doe</div>
-              </td>
-              <td className="px-6 py-4">
-                <div className="text-sm text-gray-500">jhondoe@example.com</div>
-              </td>
-              <td className="px-6 py-4 text-sm text-gray-500">2021-1-12</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="px-4 py-1 text-sm text-white bg-blue-400 rounded"
-                >
-                  Edit
-                </a>
-              </td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="px-4 py-1 text-sm text-white bg-red-400 rounded"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr className="whitespace-nowrap">
-              <td className="px-6 py-4 text-sm text-gray-500">1</td>
-              <td className="px-6 py-4">
-                <div className="text-sm text-gray-900">Jon doe</div>
-              </td>
-              <td className="px-6 py-4">
-                <div className="text-sm text-gray-500">jhondoe@example.com</div>
-              </td>
-              <td className="px-6 py-4 text-sm text-gray-500">2021-1-12</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="px-4 py-1 text-sm text-white bg-blue-400 rounded"
-                >
-                  Edit
-                </a>
-              </td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="px-4 py-1 text-sm text-white bg-red-400 rounded"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-            <tr className="whitespace-nowrap">
-              <td className="px-6 py-4 text-sm text-gray-500">1</td>
-              <td className="px-6 py-4">
-                <div className="text-sm text-gray-900">Jon doe</div>
-              </td>
-              <td className="px-6 py-4">
-                <div className="text-sm text-gray-500">jhondoe@example.com</div>
-              </td>
-              <td className="px-6 py-4 text-sm text-gray-500">2021-1-12</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="px-4 py-1 text-sm text-white bg-blue-400 rounded"
-                >
-                  Edit
-                </a>
-              </td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="px-4 py-1 text-sm text-white bg-red-400 rounded"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div className="bg-white p-5 w-full rounded">
+      <div className="flex justify-between m-2 p-2">
+        <div>
+          <DeleteButton onClick={onDeletePressed}></DeleteButton>
+          <ViewButton onClick={onViewPressed}></ViewButton>
+        </div>
+        <div>
+          <AddButton onClick={onAddPressed}></AddButton>
+        </div>
+      </div>
+      <div className="ag-theme-alpine w-full h-[600px]">
+        <AgGridReact
+          ref={gridRef}
+          flex
+          rowData={transports}
+          defaultColDef={defaultColDef}
+          columnDefs={columnDefs}
+          rowSelection={"single"}
+          pagination={true}
+          onSelectionChanged={onSelectionChanged}
+        ></AgGridReact>
       </div>
     </div>
   );
