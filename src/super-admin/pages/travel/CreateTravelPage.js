@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import CancelButton from "../../unitilies/CancelButton";
 import SaveButton from "../../unitilies/SaveButton";
-import { createBaseApi } from "../../ApiAgent";
+import { createBaseApiAuth } from "../../ApiAgent";
 import { useNavigate } from "react-router-dom";
 import Input from "../../unitilies/Input";
 import TransportationSelect from "./TransportationSelect";
@@ -22,15 +22,15 @@ const CreateTravelPage = () => {
       transportations: [{}],
       includedInsurance: false,
     });
-    createBaseApi()
+    createBaseApiAuth()
       .get("tourType")
       .then((res) => setTourTypes(res.data));
 
-    createBaseApi()
+    createBaseApiAuth()
       .get("hotel")
       .then((res) => setHotels(res.data));
 
-    createBaseApi()
+    createBaseApiAuth()
       .get("transportation")
       .then((res) => setTransportations(res.data));
   }, []);
@@ -49,7 +49,7 @@ const CreateTravelPage = () => {
     );
     res.transportations = filteredTransportation;
     setTour(res);
-    createBaseApi()
+    createBaseApiAuth()
       .post(`tour`, res)
       .then((res) => {
         console.log(res);

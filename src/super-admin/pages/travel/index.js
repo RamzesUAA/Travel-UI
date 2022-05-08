@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TravelCard from "./Card";
 import borabora from "../../../assets/borabora.jpg";
 import SelectsCard from "./SelectsCard";
-import { createBaseApi } from "../../ApiAgent";
+import { createBaseApiAuth } from "../../ApiAgent";
 import AddButton from "../../unitilies/AddButton";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const TravelPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    createBaseApi()
+    createBaseApiAuth()
       .get("tour")
       .then((res) => setTours(res.data));
   }, []);

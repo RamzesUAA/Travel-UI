@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createBaseApi } from "../../ApiAgent";
+import { createBaseApiAuth } from "../../ApiAgent";
 import EditButton from "../../unitilies/EditButton";
 import DeleteButton from "../../unitilies/DeleteButton";
 
@@ -9,7 +9,7 @@ const ViewTravelPage = () => {
   const [tour, setTour] = useState();
   const navigate = useNavigate();
   useEffect(() => {
-    createBaseApi()
+    createBaseApiAuth()
       .get(`tour/${params.id}`)
       .then((res) => setTour(res.data));
   }, []);

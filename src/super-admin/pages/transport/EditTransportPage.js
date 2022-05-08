@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CancelButton from "../../unitilies/CancelButton";
 import SaveButton from "../../unitilies/SaveButton";
-import { createBaseApi } from "../../ApiAgent";
+import { createBaseApiAuth } from "../../ApiAgent";
 import { useNavigate } from "react-router-dom";
 
 const EditTransportPage = () => {
@@ -13,7 +13,7 @@ const EditTransportPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    createBaseApi()
+    createBaseApiAuth()
       .get(`transport/${params.id}`)
       .then((res) => {
         setTransport(res.data);
@@ -27,7 +27,7 @@ const EditTransportPage = () => {
   };
 
   const onSavePressed = () => {
-    createBaseApi()
+    createBaseApiAuth()
       .put(`transport`, transport)
       .then(() => {
         navigate("/admin/transport");

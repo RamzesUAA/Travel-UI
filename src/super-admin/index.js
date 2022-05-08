@@ -6,18 +6,21 @@ import CheckPage from "./pages/check";
 import TransporPage from "./pages/transport";
 import TransportationPage from "./pages/transportation";
 import HotelPage from "./pages/hotel";
-import CustomerPage from "./pages/customer";
 import EditTransportPage from "./pages/transport/EditTransportPage";
 import CreateTransportPage from "./pages/transport/CreateTransportPage";
 import ViewTravelPage from "./pages/travel/ViewTravelPage";
 import EditTravelPage from "./pages/travel/EditTravelPage";
 import CreateTravelPage from "./pages/travel/CreateTravelPage";
+import RequireAuth from "../login/RequireAuth";
 
 const AdminPage = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="travel" element={<TravelPage />} />
+        <Route element={<RequireAuth allowedRoles={["TravelAgent"]} />}>
+          <Route path="travel" element={<TravelPage />} />
+        </Route>
+
         <Route path="travel/:id" element={<ViewTravelPage />} />
         <Route path="travel/edit/:id" element={<EditTravelPage />} />
         <Route path="travel/new" element={<CreateTravelPage />} />
@@ -31,7 +34,6 @@ const AdminPage = () => {
         <Route path="transportation" element={<TransportationPage />} />
 
         <Route path="hotel" element={<HotelPage />} />
-        <Route path="customer" element={<CustomerPage />} />
       </Route>
     </Routes>
   );

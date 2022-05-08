@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CancelButton from "../../unitilies/CancelButton";
 import SaveButton from "../../unitilies/SaveButton";
-import { createBaseApi } from "../../ApiAgent";
+import { createBaseApiAuth } from "../../ApiAgent";
 import { useNavigate } from "react-router-dom";
 
 const CreateTransportPage = () => {
@@ -13,7 +13,7 @@ const CreateTransportPage = () => {
   };
 
   const onSavePressed = () => {
-    createBaseApi()
+    createBaseApiAuth()
       .post(`transport`, transport)
       .then(() => {
         navigate("/admin/transport");

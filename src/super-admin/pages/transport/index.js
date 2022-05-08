@@ -3,7 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import DeleteButton from "../../unitilies/DeleteButton";
 import ViewButton from "../../unitilies/EditButton";
 import AddButton from "../../unitilies/AddButton";
-import { createBaseApi } from "../../ApiAgent";
+import { createBaseApiAuth } from "../../ApiAgent";
 import { useNavigate } from "react-router-dom";
 
 const columnDefs = [
@@ -34,7 +34,7 @@ const TransporPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    createBaseApi()
+    createBaseApiAuth()
       .get("transport")
       .then((res) => {
         setTransports(res?.data);
@@ -53,7 +53,7 @@ const TransporPage = () => {
   const onDeletePressed = () => {
     const id = selectedRow?.[0]?.id;
     id &&
-      createBaseApi()
+      createBaseApiAuth()
         .delete("transport", { data: { id } })
         .then((res) => {
           res && setTransports(transports.filter((t) => t.id != id));
