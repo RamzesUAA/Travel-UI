@@ -20,6 +20,12 @@ const TravelPage = () => {
     navigate("new");
   };
 
+  const onViewPressed = (id) => {
+    navigate(`${id}`);
+  };
+  const onEditPressed = (id) => {
+    navigate(`edit/${id}`);
+  };
   return (
     <div className="bg-white py-5 w-full rounded h-100">
       <div className="flex justify-center">
@@ -28,6 +34,9 @@ const TravelPage = () => {
       <div className="max-w-[1240px] mx-auto px-4 py-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {tours.map((tour) => (
           <SelectsCard
+            key={tour.id}
+            onViewPress={() => onViewPressed(tour?.id)}
+            onEditPress={() => onEditPressed(tour?.id)}
             bg={borabora}
             id={tour.id}
             location={`${tour.country}, ${tour.city}`}

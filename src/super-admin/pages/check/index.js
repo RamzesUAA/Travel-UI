@@ -5,6 +5,7 @@ import ViewButton from "../../unitilies/EditButton";
 import AddButton from "../../unitilies/AddButton";
 import { createBaseApiAuth } from "../../ApiAgent";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const columnDefs = [
   {
@@ -30,7 +31,17 @@ const columnDefs = [
     },
     headerName: "Travel agent name",
   },
-  { field: "createdAt" },
+  {
+    valueGetter: function sumField(params) {
+      moment(params.data.createdAt).format("YYYY/MM/DD  HH:mm");
+      return `${moment(params.data.createdAt).format("YYYY/MM/DD  HH:mm")}`;
+      // (
+      //   <Moment format="YYYY/MM/DD  HH:mm">{params.data.createdAt}</Moment>
+      // );
+    },
+    headerName: "Created At",
+  },
+  // { field: "createdAt" },
 ];
 
 const defaultColDef = {

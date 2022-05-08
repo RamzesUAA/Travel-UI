@@ -17,23 +17,25 @@ const AdminPage = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route element={<RequireAuth allowedRoles={["TravelAgent"]} />}>
+        <Route
+          element={<RequireAuth allowedRoles={["TravelAgent", "Admin"]} />}
+        >
           <Route path="travel" element={<TravelPage />} />
+
+          <Route path="travel/:id" element={<ViewTravelPage />} />
+          <Route path="travel/edit/:id" element={<EditTravelPage />} />
+          <Route path="travel/new" element={<CreateTravelPage />} />
+
+          <Route path="check" element={<CheckPage />} />
+
+          <Route path="transport" element={<TransporPage />} />
+          <Route path="transport/edit/:id" element={<EditTransportPage />} />
+          <Route path="transport/new" element={<CreateTransportPage />} />
+
+          <Route path="transportation" element={<TransportationPage />} />
+
+          <Route path="hotel" element={<HotelPage />} />
         </Route>
-
-        <Route path="travel/:id" element={<ViewTravelPage />} />
-        <Route path="travel/edit/:id" element={<EditTravelPage />} />
-        <Route path="travel/new" element={<CreateTravelPage />} />
-
-        <Route path="check" element={<CheckPage />} />
-
-        <Route path="transport" element={<TransporPage />} />
-        <Route path="transport/edit/:id" element={<EditTransportPage />} />
-        <Route path="transport/new" element={<CreateTransportPage />} />
-
-        <Route path="transportation" element={<TransportationPage />} />
-
-        <Route path="hotel" element={<HotelPage />} />
       </Route>
     </Routes>
   );

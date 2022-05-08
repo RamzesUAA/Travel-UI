@@ -40,7 +40,13 @@ const LoginPage = () => {
       //console.log(JSON.stringify(response));
       const accessToken = response?.data?.token;
       const roles = response?.data?.role;
-      setAuth({ user, pwd, roles, accessToken });
+      setAuth({
+        user,
+        roles,
+        accessToken,
+        firstName: response?.data?.firstName,
+        lastName: response?.data?.lastName,
+      });
       console.log("##############");
       console.log({ user, pwd, roles, accessToken });
       localStorage.setItem("token", accessToken);

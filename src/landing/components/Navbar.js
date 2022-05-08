@@ -4,13 +4,19 @@ import { BiSearch } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const [logo, setLogo] = useState(false);
+  const navigate = useNavigate();
   const handleNav = () => {
     setNav(!nav);
     setLogo(!logo);
+  };
+
+  const onAdminPresssed = () => {
+    navigate("admin/travel");
   };
 
   return (
@@ -19,10 +25,13 @@ const Navbar = () => {
         <h1 onClick={handleNav}>TRAVEL-APP</h1>
       </div>
 
-      {/* <div className="hidden md:flex">
-        <BiSearch size={20} />
-        <BsPerson size={20} />
-      </div> */}
+      <div className="hidden md:flex">
+        <BsPerson
+          className="cursor-pointer"
+          size={30}
+          onClick={onAdminPresssed}
+        />
+      </div>
 
       {/* Hamburger */}
       {/* <div className="md:hidden z-10" onClick={handleNav}>

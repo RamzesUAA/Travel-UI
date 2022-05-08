@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { createBaseApiAuth } from "../../ApiAgent";
 import EditButton from "../../unitilies/EditButton";
 import DeleteButton from "../../unitilies/DeleteButton";
+import Moment from "react-moment";
 
 const ViewTravelPage = () => {
   const params = useParams();
@@ -123,7 +124,9 @@ const ViewTravelPage = () => {
                   Depature time:
                 </div>
                 <div className="text-lg inline">
-                  {transportation?.depatureTime}
+                  <Moment format="YYYY/MM/DD  HH:mm">
+                    {transportation?.depatureTime}
+                  </Moment>
                 </div>
               </div>
               <div className="eating-type-view">
@@ -139,7 +142,9 @@ const ViewTravelPage = () => {
                   Arrival time:
                 </div>
                 <div className="text-lg inline">
-                  {transportation?.arrivalTime}
+                  <Moment format="YYYY/MM/DD  HH:mm">
+                    {transportation?.arrivalTime}
+                  </Moment>
                 </div>
               </div>
             </div>

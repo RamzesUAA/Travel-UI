@@ -36,7 +36,7 @@ const EditTravelPage = () => {
   }, []);
 
   const onCancelPressed = () => {
-    navigate(-1);
+    navigate("/admin/travel");
   };
 
   const onSavePressed = () => {

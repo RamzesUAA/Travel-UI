@@ -5,6 +5,7 @@ import ViewButton from "../../unitilies/EditButton";
 import AddButton from "../../unitilies/AddButton";
 import { createBaseApiAuth } from "../../ApiAgent";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const columnDefs = [
   {
@@ -15,10 +16,20 @@ const columnDefs = [
       return <a href="check">{params.value}</a>;
     },
   },
+  {
+    valueGetter: function sumField(params) {
+      return `${moment(params.data.arrivalTime).format("YYYY/MM/DD  HH:mm")}`;
+    },
+    headerName: "Arrival Time",
+  },
   { field: "arrivalLocation" },
-  { field: "arrivalTime" },
   { field: "depatureLocation" },
-  { field: "depatureTime" },
+  {
+    valueGetter: function sumField(params) {
+      return `${moment(params.data.depatureTime).format("YYYY/MM/DD  HH:mm")}`;
+    },
+    headerName: "Depature Time",
+  },
   {
     headerName: "Transport Id",
     valueGetter: (params) => {

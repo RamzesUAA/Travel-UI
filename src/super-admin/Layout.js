@@ -1,8 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { BsPerson } from "react-icons/bs";
+import useAuth from "../hooks/useAuth";
 
 const Layout = () => {
+  const { auth, setAuth } = useAuth();
+  const [personPressed, setPersonPressed] = useState(false);
+
+  const onLogoutPressed = () => {
+    setAuth({});
+    localStorage.setItem("token", "");
+  };
   return (
     <div className="bg-neutral-100 h-auto pb-10">
       <div className="w-full flex justify-between items-center px-4 pb-10">
@@ -25,15 +33,24 @@ const Layout = () => {
           <li>
             <Link to="/admin/transportation">Transportations</Link>
           </li>
-          <li>
-            <Link to="/admin/customer">Customers</Link>
-          </li>
         </ul>
 
-        <div className="hidden md:flex">
+        <div
+          className="hidden md:flex cursor-pointer"
+          onClick={() => setPersonPressed(!personPressed)}
+        >
           <BsPerson className="mr-3" size={20} />
-          <div>Roman Alberda</div>
+          <div>
+            {auth?.firstName} {auth?.lastName}
+          </div>
         </div>
+      </div>
+      <div
+        className="cursor-pointer absolute top-[44px] right-0 w-40 bg-white rounded-md shadow-sm -space-y-px"
+        style={{ display: personPressed ? "block" : "none" }}
+        onClick={onLogoutPressed}
+      >
+        Logout
       </div>
       <div className="max-w-[1240px] mx-auto">
         <Outlet />
@@ -41,5 +58,14 @@ const Layout = () => {
     </div>
   );
 };
+
+// position: absolute;
+// right: 0;
+// top: 44px;
+// width: 164px;
+// background-color: white;
+// font-weight: 500;
+// border-radius: 10px;
+// cursor: pointer;
 
 export default Layout;
